@@ -1,0 +1,43 @@
+class Solution {
+    public int twoCitySchedCost(int[][] costs) {
+        
+        return minCost(costs.length,costs,0,0);
+}
+    
+    
+    public int minCost(int noOfPersons,int[][] costs,int cityACount, int cityBCount){
+        
+        if(noOfPersons==0){
+            if(cityACount == cityBCount){
+                return 0;
+            }else{
+                return Integer.MAX_VALUE;
+            }
+        }
+        
+        int max = Math.max(cityACount,cityBCount);
+        int min = Math.min(cityACount,cityBCount);
+        
+        if(min+noOfPersons<max){
+            return Integer.MAX_VALUE;
+        }
+        
+        int sol1 = minCost(noOfPersons-1,costs,cityACount+1,cityBCount);
+        int sol2 = minCost(noOfPersons-1,costs,cityACount,cityBCount+1);
+        
+        if(sol1!=Integer.MAX_VALUE && sol2!=Integer.MAX_VALUE){
+            return Math.min(costs[noOfPersons-1][0] + sol1, costs[noOfPersons-1][1] + sol2);
+        }else if(sol1!=Integer.MAX_VALUE){
+            return costs[noOfPersons-1][0] + sol1;
+        }else if(sol2!=Integer.MAX_VALUE){
+            return costs[noOfPersons-1][1] + sol2;
+        }else{
+            return Integer.MAX_VALUE;
+        }
+        
+        
+        
+    }
+    
+    
+}
