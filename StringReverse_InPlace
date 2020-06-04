@@ -1,0 +1,14 @@
+class Solution {
+    public void reverseString(char[] s) {
+        
+        int n = s.length;
+        int itr = n/2;
+        for(int i=0;i<itr;i++){
+            char temp = s[i];
+            s[i] = s[n-i-1];
+            s[n-i-1] = temp;
+        }
+    }
+}
+
+//100% time efficient
