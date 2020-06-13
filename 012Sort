@@ -1,0 +1,30 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        
+        int i=0,j=0,k=nums.length-1;
+        while(j<=k){
+           switch(nums[j]){
+            case 0: 
+                   if(i!=j){
+                       int temp = nums[i];
+                       nums[i] = nums[j];
+                       nums[j] = temp;
+                   }
+                
+                i++;
+                j++;
+                break;
+            case 1:
+                j++;
+                break;
+            case 2:
+                int temp = nums[k];
+                nums[k] = nums[j];
+                nums[j] = temp;
+                k--;          
+        }
+       } 
+        
+        
+    }
+}
