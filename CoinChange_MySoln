@@ -1,0 +1,40 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        
+        int table[][] = new int[coins.length+1][amount+1];
+        for (int[] row : table) 
+            Arrays.fill(row, -1); 
+        return noOfWays(0,coins,amount,table);
+        
+        
+    }
+    
+    int noOfWays(int start,int[] coins,int amount,int table[][]){
+        
+         if(amount == 0){ 
+            table[start][0] = 1;
+            return table[start][0];
+        }
+        if(start == coins.length){
+            table[coins.length][amount] = 0;
+            return table[coins.length][amount];
+        }
+       
+        if(coins[start]<=amount){
+            if(table[start][amount-coins[start]] == -1)
+                table[start][amount-coins[start]] = noOfWays(start,coins,amount-coins[start],table);
+            if(table[start+1][amount] == -1)
+                table[start+1][amount] = noOfWays(start+1,coins,amount,table);
+        
+            return table[start][amount-coins[start]]+table[start+1][amount];
+            
+        }else{
+            if(table[start+1][amount] == -1)
+                table[start+1][amount] = noOfWays(start+1,coins,amount,table);
+            return table[start+1][amount];
+        }
+            
+    }
+    
+   
+}
